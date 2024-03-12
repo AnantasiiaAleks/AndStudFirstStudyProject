@@ -57,6 +57,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		this.rogue = new Texture("units/Rogue.png");
 		this.sniper = new Texture("units/Sniper.png");
 		this.spearMan = new Texture("units/SpearMan.png");
+
 	}
 
 	@Override
@@ -100,7 +101,9 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		boolean flag = true;
 		for (BaseChar unit : darkTeam) {
-			if (unit.getHealth() > 0) flag = false;
+            if (unit.getHealth() > 0) {
+                flag = false;
+            }
 		}
 		if (flag) {
 			Gdx.graphics.setTitle("Команда тёмных победила");
@@ -109,22 +112,22 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		flag = true;
 		for (BaseChar unit : holyTeam) {
-			if (unit.getHealth() > 0) flag = false;
+            if (unit.getHealth() > 0) {
+                flag = false;
+            }
 		}
 		if (flag) {
 			Gdx.graphics.setTitle("Команда светлых победила");
 			return;
 		}
 
-		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) ||
-				Gdx.input.isButtonPressed(Input.Buttons.LEFT) ||
-				Gdx.input.justTouched()) {
-			for (BaseChar unit : allTeam)
+		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) || Gdx.input.justTouched()) {
+				for (BaseChar unit : allTeam) {
 				if (holyTeam.contains(unit)) unit.step(darkTeam, holyTeam);
 				else unit.step(holyTeam, darkTeam);
 			}
+		}
 	}
-	
 	@Override
 	public void dispose() {
 			batch.dispose();
